@@ -1,13 +1,9 @@
-name: CI con AutoCommit
+name: CI con Artefactos
 
 on:
   push:
     branches: [ "main" ]
   workflow_dispatch:
-
-permissions:
-  contents: write   # 👈 IMPORTANTE: permite que el bot pueda hacer commits/push
-
 
 jobs:
   test-and-update:
@@ -27,8 +23,8 @@ jobs:
       - name: Ejecutar script de tests y actualizar README
         run: python update_readme.py
 
-      - name: Commit automático del README
-        uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Subir README como artefacto
+        uses: actions/upload-artifact@v4
         with:
-          commit_message: "Update README con estado de tests"
-          file_pattern: README.md
+          name: readme-actualizado
+          path: README.md
