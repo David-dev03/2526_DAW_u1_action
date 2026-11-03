@@ -1,340 +1,205 @@
-# 1. Actividad: *GitHub Actions: entendiendo Workflow.*
+# README de entrega — DAW-U1.-Practica001
 
-## 🎯 Objetivos de aprendizaje
+## Estado de la entrega
 
-* Comprender la estructura de un workflow (`on`, `jobs`, `steps`).
+* **Estado general:** ENTREGADO
+* **Estudiante o integrantes:** David Muñoz Valdés
+* **Proyecto intermodular:** Aplicación de Mantenimiento de Vehículos (Módulo de Tienda y Descuentos)
+* **Repositorio:** [https://github.com/IES-Rafael-Alberti/deaw-2dawa-2627-u01-p06-documentacion-ci-cd-david-dev03](https://github.com/IES-Rafael-Alberti/deaw-2dawa-2627-u01-p06-documentacion-ci-cd-david-dev03)
 
-   * Ejecutar tests automáticamente en GitHub.
-   * Automatizar la actualización del `README.md` con el resultado.
- 
-* Explorar mejoras progresivas para descubrir el potencial de GitHub Actions.
+## 1. Entregable 1 — Repositorio y workflow funcionando
 
----
+**Estado del entregable 1:** ENTREGADO
 
-## 📝 Contexto
+* **URL del repositorio:** [https://github.com/IES-Rafael-Alberti/deaw-2dawa-2627-u01-p06-documentacion-ci-cd-david-dev03](https://github.com/IES-Rafael-Alberti/deaw-2dawa-2627-u01-p06-documentacion-ci-cd-david-dev03)
+* **Visibilidad:** Privado
+* **Acceso del profesor:** Al usar GitHub Classroom, la organización y el profesorado tienen acceso administrativo automático al repositorio.
+* **Archivo del workflow:** .github/workflows/ci.yml
+* **Ejecución correcta de GitHub Actions:** Ver pestaña Actions en el repositorio ([https://github.com/IES-Rafael-Alberti/deaw-2dawa-2627-u01-p06-documentacion-ci-cd-david-dev03/actions](https://github.com/IES-Rafael-Alberti/deaw-2dawa-2627-u01-p06-documentacion-ci-cd-david-dev03/actions))
+* **Evento que inicia el workflow:** Se inicia mediante los eventos push (a la rama main) y manualmente con workflow_dispatch.
 
-Partimos de un **repositorio base** que contiene:
+## 2. Entregable 2 — Documentación HTML y en otro formato
 
-* Un programa sencillo (`main.py`).
-* Un test unitario (`test_main.py`).
-* Un script (`update_readme.py`) que ejecuta los tests y modifica el `README.md`, con el resultado de ejecutar los test.
-* El workflow básico (`ci.yml`) que ejecuta el script y hace commit automático con `git-auto-commit-action`.
+**Estado del entregable 2:** ENTREGADO
 
----
+| Formato | Archivo o ruta dentro de docs/ | Enlace para consultarlo | Cómo se genera o publica |
+| --- | --- | --- | --- |
+| HTML | docs_codigo/html/main.html | Descargable en artefactos | pdoc src/main.py -o docs_codigo/html |
+| Markdown | docs_codigo/md/documentacion.md | Descargable en artefactos | pandoc docs_codigo/html/main.html -o docs_codigo/md/documentacion.md |
 
-## 🔹 Parte 1: Workflow básico. Ya implementado.
+* **Generación local comprobada:** Se configuró un entorno virtual (.venv), se activó con source .venv/bin/activate y se instaló pdoc. Al ejecutar los comandos, se verificó la creación de las carpetas docs_codigo/html y docs_codigo/md localmente antes de pasarlo al CI.
+* **Cómo se almacenan los resultados:** Como Artefactos de Actions (mediante actions/upload-artifact@v4) empaquetados bajo el nombre documentacion-codigo.
+* **Evidencia:** Disponibles para descargar en formato .zip en el resumen de cada ejecución (Run) exitosa en la pestaña Actions.
 
-1. El alumno clona el repositorio base.
-2. Comprende el contenido del script y del workflow.
-3. Ejecuta el workflow manualmente y comprueba que el `README.md` se actualiza con una de estas dos salidas:
+## 3. Entregable 3 — README del proyecto, proceso y cuestionario
 
-   * ✅ *Tests correctos*
-   * ❌ *Tests fallidos*
+**Estado del entregable 3:** ENTREGADO
 
----
+### 3.a. Herramientas y comandos
 
-## 🔹 Parte 2: Mejora obligatoria (nivel básico)
+**Estado:** ENTREGADO
 
-Cada alumno debe implementar al menos una de estas mejoras:
+| Herramienta o dependencia | Versión | Uso |
+| --- | --- | --- |
+| Python | 3.10 | Lenguaje fuente y runtime en el workflow |
+| pdoc | Última | Generador de la documentación inicial en formato HTML |
+| pandoc | Última (apt-get) | Conversor de HTML a Markdown para el multiformato |
+| MkDocs (Material) | Última | Generación y despliegue del sitio web estático |
 
-* **Historial de resultados en el README:** en lugar de sobrescribir, añadir nuevas líneas con fecha/hora.
-* **Generar un archivo `report.md`:** con más detalles de la ejecución (tests pasados, fallidos, tiempo).
+Comandos de instalación de dependencias:
+pip install pdoc mkdocs mkdocs-material
+sudo apt-get update && sudo apt-get install -y pandoc
 
----
+Comandos para generar HTML:
+mkdir -p docs_codigo/html docs_codigo/md
+pdoc src/main.py -o docs_codigo/html
 
-## 📑 Entregables
+Comandos para generar el segundo formato (Markdown):
+pandoc docs_codigo/html/main.html -o docs_codigo/md/documentacion.md
 
-Cada alumno debe entregar:
+### 3.b. Código fuente documentado
 
-1. Enlace a su repositorio con el workflow funcionando.
-2. Evidencia en el historial de commits de:
+**Estado:** ENTREGADO
 
-   * Al menos un test correcto y uno fallido de la solución entregada.
-   * Una mejora implementada (historial, report.md, badge o equivalente).
-3. Breve documento (README_mejora.md) explicando:
+* **Estilo de documentación:** Google Style Docstrings
+* **Archivo fuente documentado:** src/main.py ([https://github.com/IES-Rafael-Alberti/deaw-2dawa-2627-u01-p06-documentacion-ci-cd-david-dev03/blob/main/src/main.py](https://www.google.com/search?q=https://github.com/IES-Rafael-Alberti/deaw-2dawa-2627-u01-p06-documentacion-ci-cd-david-dev03/blob/main/src/main.py))
+* **Fragmento con la documentación estructurada:**
 
-   * Qué mejoras ha implementado.
-   * Qué hace tu workflow.
+Calcula el precio final de un recambio aplicando los descuentos de la app.
+Aplica un 10% de descuento automático si el usuario está suscrito al plan premium.
+Luego, si hay un cupón promocional válido, resta esa cantidad.
+Args:
+precio_base (float): El precio original de la pieza.
+es_premium (bool, optional): True si el usuario paga la suscripción. Por defecto False.
+cupon (str, optional): Código promocional introducido. Por defecto "".
+Returns:
+float: El precio total redondeado que se va a mandar a la pasarela de pago.
 
----
+* **Documentación generada a partir de ese fragmento:** Se encuentra empaquetada en el HTML del artefacto y renderizada en la web de MkDocs.
 
-## 📌 Evaluación (rúbrica simplificada)
+### 3.c. Formatos generados y enlaces
 
-* ✅ Workflow básico funciona y modifica el README.
-* ✅ Al menos una mejora implementada.
-* ✅ Explicación clara del funcionamiento y ventajas.
+**Estado:** ENTREGADO
 
+* **HTML y Segundo formato:** Descargables desde los Artefactos del repositorio ([https://github.com/IES-Rafael-Alberti/deaw-2dawa-2627-u01-p06-documentacion-ci-cd-david-dev03/actions](https://github.com/IES-Rafael-Alberti/deaw-2dawa-2627-u01-p06-documentacion-ci-cd-david-dev03/actions)).
+* **Artefactos de GitHub Actions:** Se generan bajo el nombre documentacion-codigo en el Job generar-artefactos-codigo.
 
----
+### 3.d. Funcionamiento del workflow y colaboración
 
-# 2. SOLUCIÓN: "GitHub Actions + Python Script + Auto Commit"
+**Estado:** ENTREGADO
 
-## 📝 Preparación del repositorio base
+1. **Evento y rama:** Disparado por un push a la rama main.
+2. **Preparación del entorno:** Se hace un checkout@v4, se configura Python 3.10 y se instalan dependencias (pdoc mediante pip y pandoc mediante apt-get).
+3. **Generación:** pdoc genera el HTML y pandoc lo convierte a Markdown. En un job secundario, MkDocs construye el sitio.
+4. **Almacenamiento o publicación:** El código documentado sube como artefacto (upload-artifact@v4). La web se publica usando la acción peaceiris/actions-gh-pages@v4 hacia la rama gh-pages.
+5. **Comprobación:** El check verde en la pestaña Actions y la disponibilidad de la web pública confirman el éxito.
 
-Estructura:
+**Colaboración con GitHub:** Al automatizar este proceso mediante CI/CD, cualquier miembro del equipo que abra una Pull Request pasará por los checks de este workflow. Las reglas de protección de rama impedirían la fusión de código si la documentación no logra construirse, garantizando consistencia en el proyecto colaborativo.
 
-```
-mi-proyecto-actions/
- ├── main.py
- ├── test_main.py
- ├── update_readme.py   👈 nuevo script
- └── README.md
-```
+### 3.e. Mensajes de commit
 
+**Estado:** ENTREGADO
 
-### README.md inicial   
+| Hash o enlace | Mensaje real | Qué cambio demuestra |
+| --- | --- | --- |
+| c4ff3f8 | feat: añade codigo python, mkdocs y workflow de actions | Creación de la estructura base y automatización CI/CD. |
+| 7a92eaa | fix: instala pandoc en el servidor de actions | Solución del error de entorno instalando el conversor en la máquina Ubuntu. |
 
-Una posible versión base del fichero README.md sería el siguiente (aunque finalmente será mas completo): 
+**Justificación:** Los mensajes siguen la convención Conventional Commits (feat:, fix:), están escritos en modo imperativo y describen exactamente qué acción se ha llevado a cabo, facilitando la comprensión del historial.
 
+### 3.f. Acceso, seguridad y SSH
 
-```markdown
-# Mi Proyecto con GitHub Actions
+**Estado:** ENTREGADO
 
-Este proyecto sirve para aprender a usar GitHub Actions 🚀
+* **Permisos del repositorio:** El repositorio es privado, gestionado por la organización del instituto y limitado al alumno y profesorado.
+* **Protección de ramas o revisiones:** No configurada explicitamente por el alumno debido a las limitaciones de permisos de la organización, pero controlada por Classroom.
+* **Secretos de Actions:** Se utiliza un token efímero automático (${{ secrets.GITHUB_TOKEN }}) para que el bot pueda publicar en la rama gh-pages sin necesidad de exponer credenciales personales.
+* **Configuración SSH:** Se generó una clave ed25519 en un equipo macOS (MacBook Air) y su clave pública se añadió a los ajustes SSH de la cuenta personal de GitHub.
+* **Prueba SSH:**
+lagartijaquejica@MacBook-Air-de-David ~ % ssh -T git@github.com
+Hi David-dev03! You've successfully authenticated, but GitHub does not provide shell access.
 
-## 3stado de los tests
-*Aún no ejecutados...*
-```
+### 3.g. Clonar y reproducir la generación
 
-### main.py   
+**Estado:** ENTREGADO
 
-Un ejemplo básico, que contiene una función saludo.  Puedes modificar la función cuando quieres que falle. 
+Pasos para clonar y ejecutar en local:
+git clone git@github.com:IES-Rafael-Alberti/deaw-2dawa-2627-u01-p06-documentacion-ci-cd-david-dev03.git
+cd deaw-2dawa-2627-u01-p06-documentacion-ci-cd-david-dev03
+python3 -m venv .venv
+source .venv/bin/activate
+pip install pdoc mkdocs mkdocs-material
+mkdocs serve
 
-```python
-def saludo(nombre: str) -> str:
-    return f"Hola, {nombre}!"
-```
+* **Requisitos previos:** Python 3 instalado, Git y conexión SSH configurada.
+* **Resultado esperado:** Un servidor local web ejecutándose en [http://127.0.0.1:8000/](https://www.google.com/search?q=http://127.0.0.1:8000/) con la documentación de MkDocs.
+* **Cómo volver a ejecutar el workflow:** Haciendo cualquier commit y push a la rama main.
 
-### test\_main.py    
+### Cuestionario de evaluación CE a–h
 
-Un test básico. 
+#### CE a. Herramientas de generación
 
-```python
-from main import saludo
+* **Estado:** ENTREGADO
+* **Respuesta:** Se utilizó pdoc para procesar el código Python y generar HTML, y MkDocs (Material) para el sitio web estático.
+* **Evidencia:** Ver bloque 3.a.
 
-def test_saludo():
-    assert saludo("Mundo") == "Hola, Mundo!"
-```
+#### CE b. Documentación de componentes
 
----
+* **Estado:** ENTREGADO
+* **Respuesta:** Se ha utilizado el formato Google Style. El bloque de código documentado (calcular_precio_repuesto) detalla Args: y Returns:, que pdoc parsea automáticamente.
+* **Evidencia:** Ver bloque 3.b.
 
-## 🐍 Script en Python (`update_readme.py`)
+#### CE c. Formatos
 
-Script en python. Este script ejecuta los tests y actualiza el README:
+* **Estado:** ENTREGADO
+* **Respuesta:** Se generó un archivo Markdown (.md) adicional. Se consiguió encadenando el comando pdoc con el uso de pandoc para la conversión directa en el pipeline de Ubuntu.
+* **Evidencia:** Ver bloque 3.c.
 
-```python
-import subprocess
+#### CE d. Colaboración
 
-def run_tests():
-    try:
-        subprocess.check_call(["pytest", "-q"])
-        return "✅ Tests correctos"
-    except subprocess.CalledProcessError:
-        return "❌ Tests fallidos"
+* **Estado:** ENTREGADO
+* **Respuesta:** GitHub permite aislar el desarrollo en ramas. Al unirlas mediante Pull Requests, las Actions verifican que la nueva documentación compila sin errores antes de mezclarse con el código principal.
+* **Evidencia:** Ver bloque 3.d.
 
-def update_readme(status: str):
-    with open("README.md", "r", encoding="utf-8") as f:
-        lines = f.readlines()
+#### CE e. Control de versiones
 
-    new_lines = []
-    for line in lines:
-        new_lines.append(line)
-        if line.strip() == "## Estado de los tests":
-            new_lines.append(status + "\n")
-            break
+* **Estado:** ENTREGADO
+* **Respuesta:** Son descriptivos e imperativos ("feat: añade...", "fix: instala..."), permitiendo saber con un vistazo al log qué problema exacto soluciona cada commit en el flujo de Actions.
+* **Evidencia:** Ver bloque 3.e.
 
-    with open("README.md", "w", encoding="utf-8") as f:
-        f.writelines(new_lines)
+#### CE f. Accesibilidad y seguridad
 
-if __name__ == "__main__":
-    status = run_tests()
-    update_readme(status)
-```
+* **Estado:** ENTREGADO
+* **Respuesta:** El repositorio es privado bajo una organización educativa. El despliegue se hace usando un Token secreto nativo y temporal de GitHub, y el acceso local se valida estrictamente por clave asimétrica SSH.
+* **Evidencia:** Ver bloque 3.f.
 
-👉 Lo que hace:
+#### CE g. Instalación, configuración y uso
 
-1. Ejecuta los tests con `pytest`.
-2. Según el resultado, genera un estado ✅ o ❌.
-3. Modifica el `README.md` justo debajo de la sección `## 3stado de los tests`.
+* **Estado:** ENTREGADO
+* **Respuesta:** El proceso de instalación y comandos locales se encuentra en la sección 3.g, mientras que las herramientas de CI/CD se listan en la 3.a.
 
----
+#### CE h. Integración continua
 
-## ⚙️ Workflow (`.github/workflows/ci.yml`)
+* **Estado:** ENTREGADO
+* **Respuesta:** Es CI/CD porque no requiere intervención humana. El evento push activa la Action, que levanta un contenedor Ubuntu, instala entornos, verifica fallos, genera los artefactos y actualiza el sitio web público automáticamente.
+* **Evidencia:** Ver bloques 3.d y el historial de Actions.
 
-El workflow que gúía el github action:   
+## 4. Entregable 4 — Publicación obligatoria con MkDocs y GitHub Pages
 
-```yaml
-name: CI con AutoCommit
+**Estado:** ENTREGADO
 
-on:
-  push:
-    branches: [ "main" ]
-  workflow_dispatch:
+* **URL pública de GitHub Pages:** [https://ies-rafael-alberti.github.io/deaw-2dawa-2627-u01-p06-documentacion-ci-cd-david-dev03/](https://ies-rafael-alberti.github.io/deaw-2dawa-2627-u01-p06-documentacion-ci-cd-david-dev03/)
+* **Workflow de construcción y despliegue:** .github/workflows/ci.yml (Job: desplegar-mkdocs)
+* **Acción y rama de publicación:** peaceiris/actions-gh-pages@v4 alojando el código en la rama gh-pages.
+* **Ejecución correcta de Actions:** Comprobado; la rama se crea dinámicamente y el sitio carga sin errores.
 
-permissions:
-  contents: write   # 👈 IMPORTANTE: permite que el bot pueda hacer commits/push
+## Conclusiones
 
-jobs:
-  test-and-update:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+Durante esta práctica he comprendido la diferencia entre documentar localmente y automatizar el proceso de integración continua (CI). Aprender a lidiar con el entorno de servidor (como la ausencia inicial de pandoc) demuestra por qué es importante estandarizar los entornos mediante Actions. Una posible mejora para el workflow sería añadir un Job intermedio de testing automatizado (por ejemplo, con pytest) antes del despliegue en Pages, asegurando que la documentación no solo compila, sino que el código base funciona correctamente.
 
-      - name: Configurar Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
+## Revisión final
 
-      - name: Instalar dependencias
-        run: pip install pytest
-
-      - name: Ejecutar script de tests y actualizar README
-        run: python update_readme.py
-
-      - name: Commit automático del README
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Update README con estado de tests"
-          file_pattern: README.md
-```
-
----
-
-## 🚦 Flujo de la actividad
-
-1. Cuando se haga un **push** en `main`.
-2. Se le da permiso de escritura para hacer commits/push al repositorio.
-3. El workflow ejecuta el script en Python.
-4. El script corre los tests y modifica el `README.md`.
-5. La acción `git-auto-commit-action` hace commit automático con los cambios.
-6. El alumno ve en el repo cómo el `README.md` se actualiza con:
-    
-    * ✅ Tests correctos
-    * ❌ Tests fallidos
-
----
-
-# 3. POSIBLES MEJORAS AL EJEMPLO ANTERIOR
-
-La idea es que no solo no repitais el ejemplo, sino que **investigueis, mejoreis y veais el potencial real de GitHub Actions**. Para ello se piden funcionalidades **extra e imaginativas**. Aqui teneis varias propuestas, de más sencillas a más potentes, todas pensadas para que veais ventajas prácticas:
-
----
-
-## 💡 Mejoras propuestas para el Action
-
-### 1. **Historial en el README**
-
-* Que en lugar de sobrescribir el estado, **guarden un histórico** en el README:
-  
-  ```markdown
-  ## 3stado de los tests
-  - ✅ 2025-09-22 18:00 - Tests correctos
-  - ❌ 2025-09-22 17:45 - Tests fallidos
-  ```
-  
-* 👉 Aprenderás a  **manejar fechas** y a **modificar archivos de forma acumulativa**.
-
----
-
-### 2. **Generar un `report.md` con detalles**
-
-* Crear un archivo `test-report.md` con:
-    
-    * Número total de tests.
-    * Tests pasados y fallidos.
-    * Tiempo de ejecución.
-
-* 👉 Aprenderás a  **exportar resultados de procesos** y tener **documentación viva** del proyecto.
-
----
-
-### 3. **Badges automáticos en README**
-
-* Añadir un **badge** dinámico al README con el estado:
-    
-    * Verde = Tests correctos
-    * Rojo = Tests fallidos
-* Usando [shields.io](https://shields.io/) o generando un badge local en SVG.
-
-* 👉 Entenderás cómo **mejorar la comunicación del estado** de un proyecto.
-
----
-
-### 4. **Notificaciones externas**
-
-* Enviar el resultado a:
-    
-    * **Slack/Discord** (webhook sencillo).
-    * **Email** (con una acción de envío).
-
-* 👉 Descrubrirás que Actions también sirve para **integrar con herramientas externas**.
-
----
-
-### 5. **Ejecutar en múltiples entornos (matrix)**
-
-* Hacer que los tests se ejecuten en:
-    
-    * Varias versiones de Python (`3.8`, `3.9`, `3.10`).
-    * O en Linux y Windows.
-     
-* 👉 Verás la potencia del `strategy.matrix` y comprobarás compatibilidad multiplataforma.
-
----
-
-### 6. **Programar ejecución automática**
-
-* Añadir `schedule` para que se ejecute cada día a medianoche.
-* El README mostraría:
-  
-  ```
-  ✅ Última comprobación automática: 2025-09-22 00:00
-  ```
-
-* 👉 Aprenderás a **programar tareas recurrentes**.
-
----
-
-### 7. **Generar una página web de resultados**
-
-* Publicar los resultados en GitHub Pages (`gh-pages`) usando `peaceiris/actions-gh-pages`.
-* 👉 Visualizarás cómo GitHub Actions puede hacer **CI/CD real** (tests + despliegue).
-
----
-
-### 8. **Crear Issues automáticos si fallan los tests**
-
-* Si un test falla → abrir un **issue automático** en el repositorio:
-  
-  ```yaml
-  - uses: actions/github-script@v7
-    with:
-      script: |
-        github.issues.create({
-          owner: context.repo.owner,
-          repo: context.repo.repo,
-          title: "❌ Tests fallidos",
-          body: "Se han detectado errores en los tests. Revisa el último commit."
-        })
-  ```
-* 👉 Aprenderás a **automatizar la gestión de incidencias**.
-
----
-
-## 🎯 Aprendizaje con estas mejoras
-
-Con estas extensiones conseguireis:
-
-* Experimentar **cómo GitHub Actions conecta piezas del desarrollo real** (tests, docs, issues, notificaciones, despliegues).
-* Entender la **ventaja competitiva** de CI/CD: feedback inmediato, documentación viva y automatización.
-* Pasar de un ejemplo didáctico a un flujo de trabajo que se parece mucho al que usan empresas reales.
-
----
-
-# Mi Proyecto con GitHub Actions
-
-Este proyecto sirve para aprender a usar GitHub Actions 🚀
-
-## Estado de los tests
-✅ Tests correctos
+* [x] Entregable 1: repositorio accesible y workflow funcionando, con un run visible.
+* [x] Entregable 2: HTML y segundo formato generados y accesibles.
+* [x] Entregable 3: secciones 3.a–3.g completas, cuestionario CE a–h respondido y evidencias enlazadas.
+* [x] Entregable 4: sitio publicado en GitHub Pages y workflow de despliegue comprobado.
